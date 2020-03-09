@@ -1,0 +1,14 @@
+name: lizardfs-master
+display-name: LizardFS Master
+summary: A distributed, fault-tolerant, Geo-Redundant file system.
+maintainer: Zicklag <zicklag@katharostech.com>
+description: |
+  A distributed, fault-tolerant, Geo-Redundant file system.
+tags:
+  # Replace "misc" with one or more whitelisted tags from this list:
+  # https://jujucharms.com/docs/stable/authors-charm-metadata
+  - misc
+subordinate: false
+requires:
+  lizardfs-chunkserver:
+    interface: lfs-chunkserver
