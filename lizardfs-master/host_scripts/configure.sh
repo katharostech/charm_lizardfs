@@ -4,33 +4,21 @@ set -e
 
 lucky set-status maintenance "Configuring LizardFS"
 
-# Set admin password
+# Get admin password
 admin_password="$(lucky leader get admin_password)"
 
-# If we are the leader and the password has not been set yet
-if [ "$(lucky leader is-leader)" = "true" -a "$admin_password" = "" ]; then
-    # Generate the admin password
-    admin_password="$(lucky random --length 32)"
-    # Set the password for followers
-    lucky leader set "admin_password=$admin_password"
-fi
-
 # Configure ports ( get port setting from kv store or generate random available port )
-metalogger_port=$(lucky kv get metalogger_port)
-metalogger_port=${metalogger_port:-$(lucky random --available-port)}
-lucky kv set "metalogger_port=$metalogger_port"
+metalogger_port=$(lucky get-config metalogger-port)
+chunkserver_port=$(lucky get-config chunkserver-port)
+client_port=$(lucky get-config client-port)
+tapeserver_port=$(lucky get-config tapeserver-port)
 
-chunkserver_port=$(lucky kv get chunkserver_port)
-chunkserver_port=${chunkserver_port:-$(lucky random --available-port)}
-lucky kv set "chunkserver_port=$chunkserver_port"
-
-client_port=$(lucky kv get client_port)
-client_port=${client_port:-$(lucky random --available-port)}
-lucky kv set "client_port=$client_port"
-
-tapeserver_port=$(lucky kv get tapeserver_port)
-tapeserver_port=${tapeserver_port:-$(lucky random --available-port)}
-lucky kv set "tapeserver_port=$tapeserver_port"
+# Open ports
+lucky port close --all
+lucky open $metalogger_port
+lucky open $chunkserver_port
+lucky open $client_port
+lucky open $tapeserver_port
 
 # Set the container env
 lucky container env set \
@@ -38,10 +26,7 @@ lucky container env set \
     "MFSMASTER_MATOML_LISTEN_PORT=$metalogger_port" \
     "MFSMASTER_MATOCS_LISTEN_PORT=$chunkserver_port" \
     "MFSMASTER_MATOCL_LISTEN_PORT=$client_port" \
-    "MFSMASTER_MATOCL_LISTEN_PORT=$tapeserver_port"
-
-# Set the command
-lucky container set-command -- master
+    "MFSMASTER_MATOTS_LISTEN_PORT=$tapeserver_port"
 
 # Get master personality and host
 if [ "$(lucky leader is-leader)" = "true" ]; then

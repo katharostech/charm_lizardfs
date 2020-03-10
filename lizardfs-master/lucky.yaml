@@ -3,12 +3,22 @@ hooks:
     - host-script: install.sh
   config-changed:
     - host-script: configure.sh
+    - host-script : handle-master-relation.sh
+      args: ["update"]
+    - host-script : handle-chunkserver-relation.sh
+      args: ["update"]
 
   leader-elected:
-    - host-script: handle-leader-elected.sh
+    - host-script: handle-leader.sh
+      args: ["elected"]
   leader-settings-changed:
-    - host-script: update-leader-settings.sh
+    - host-script: handle-leader.sh
+      args: ["settings-changed"]
 
   master-relation-joined:
     - host-script : handle-master-relation.sh
+      args: ["join"]
+  
+  chunkserver-relation-joined:
+    - host-script : handle-chunkserver-relation.sh
       args: ["join"]

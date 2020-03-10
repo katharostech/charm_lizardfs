@@ -1,15 +1,18 @@
 # These are config values that users can set from the GUI or the commandline
 options:
-  name:
-    type: string
-    default: John
-    description: The name of something
-  enable-something:
-    type: boolean
-    default: False
-    description: Whether or not to enable something
-  count:
+  metalogger-port:
     type: int
-    default: 100
-    description: How much of something
-
+    default: 9419
+    description: The client port
+  chunkserver-port:
+    type: int
+    default: 9420
+    description: The client port
+  client-port:
+    type: int
+    default: 9421
+    description: The client port
+  tapeserver-port:
+    type: int
+    default: 9424
+    description: The client port

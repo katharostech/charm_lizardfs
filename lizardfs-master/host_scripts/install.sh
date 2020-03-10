@@ -11,4 +11,10 @@ lucky container set image \
 # Set data volume
 lucky container volume add data /var/lib/mfs
 
+# Set host networking mode
+lucky container set-network host
+
+# Set container command
+lucky container set-command -- master
+
 lucky set-status active
