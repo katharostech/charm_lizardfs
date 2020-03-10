@@ -1,0 +1,5 @@
+hooks:
+  install:
+    - host-script: install.sh
+  config-changed:
+    - host-script: configure.sh

@@ -15,10 +15,10 @@ tapeserver_port=$(lucky get-config tapeserver-port)
 
 # Open ports
 lucky port close --all
-lucky open $metalogger_port
-lucky open $chunkserver_port
-lucky open $client_port
-lucky open $tapeserver_port
+lucky port open $metalogger_port
+lucky port open $chunkserver_port
+lucky port open $client_port
+lucky port open $tapeserver_port
 
 # Set the container env
 lucky container env set \
