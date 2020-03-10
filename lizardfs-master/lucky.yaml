@@ -1,0 +1,14 @@
+hooks:
+  install:
+    - host-script: install.sh
+  config-changed:
+    - host-script: configure.sh
+
+  leader-elected:
+    - host-script: handle-leader-elected.sh
+  leader-settings-changed:
+    - host-script: update-leader-settings.sh
+
+  master-relation-joined:
+    - host-script : handle-master-relation.sh
+      args: ["join"]
