@@ -17,6 +17,13 @@ if [ "$1" = "elected" ]; then
         lucky leader set "admin_password=$admin_password"
     fi
 
+    # Update container environment variables
+    lucky container env set \
+        "MFSMASTER_PERSONALITY=master" \
+        "MFS_MASTER_HOST="
+
+    lucky set-status --name leader-status active
+
 # When the leader has changed its settings
 elif [ "$1" = "settings-changed" ]; then
     # Ignore leader settings changed when we are the leader
@@ -30,15 +37,17 @@ elif [ "$1" = "settings-changed" ]; then
 
     # If the leader ip has not been set, exit 0 and wait for another leader-settings-changed hook
     if [ "$master_host" = "" ]; then
-        lucky set-status --name "leader_status" waiting "Waiting for leader"
+        lucky set-status --name leader-status waiting "Waiting for leader"
+        lucky set-status active
         exit 0
     fi
+
+    lucky set-status --name leader-status active
 
     # Update container environment variables
     lucky container env set \
         "MFSMASTER_PERSONALITY=$master_personality" \
         "MFSMASTER_MASTER_HOST=$master_host"
 fi
-
 
 lucky set-status active

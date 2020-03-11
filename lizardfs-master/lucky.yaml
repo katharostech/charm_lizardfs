@@ -11,6 +11,10 @@ hooks:
   leader-elected:
     - host-script: handle-leader.sh
       args: ["elected"]
+    - host-script: handle-master-relation.sh
+      args: ["update"]
+    - host-script: handle-chunkserver-relation.sh
+      args: ["update"]
   leader-settings-changed:
     - host-script: handle-leader.sh
       args: ["settings-changed"]
