@@ -12,6 +12,6 @@ lucky port close --all
 lucky port open $port
 
 # Set container command
-lucky container set-command -- cgiserver $port
+lucky container set-command -- cgiserver
 
 lucky set-status active

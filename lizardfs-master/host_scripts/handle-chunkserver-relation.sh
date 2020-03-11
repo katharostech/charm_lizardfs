@@ -6,7 +6,7 @@ set -e
 if [ "$1" = "join" ]; then
     lucky set-status maintenance "Joining Chunkserver relation"
 
-    lucky relation set \
+    lucky relation set --app \
         "hostname=$(lucky private-address)" \
         "port=$(lucky get-config chunkserver-port)"
 
@@ -15,7 +15,7 @@ elif [ "$1" = "update" ]; then
     lucky set-status maintenance "Updating Chunkserver relations"
 
     for relation_id in $(lucky relation list-ids --relation-name chunkserver); do
-        lucky relation set --relation-id $relation_id \
+        lucky relation set --app --relation-id $relation_id \
             "hostname=$(lucky private-address)" \
             "port=$(lucky get-config chunkserver-port)"
     done

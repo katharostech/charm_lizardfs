@@ -3,3 +3,13 @@ hooks:
     - host-script: install.sh
   config-changed:
     - host-script: configure.sh
+
+  master-relation-joined:
+    - host-script: handle-master-relation.sh
+      args: ["join"]
+  master-relation-changed:
+    - host-script: handle-master-relation.sh
+      args: ["update"]
+  master-relation-departed:
+    - host-script: handle-master-relation.sh
+      args: ["leave"]
