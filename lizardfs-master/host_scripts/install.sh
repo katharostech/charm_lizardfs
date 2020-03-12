@@ -2,7 +2,7 @@
 
 set -e
 
-lucky set-status maintenance "Installing LizardFS"
+lucky set-status maintenance "Installing LizardFS Master"
 
 # Set container image
 lucky container image set \

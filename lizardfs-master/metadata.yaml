@@ -12,6 +12,3 @@ subordinate: false
 provides:
   master:
     interface: lfs-master
-requires:
-  chunkserver:
-    interface: lfs-chunkserver

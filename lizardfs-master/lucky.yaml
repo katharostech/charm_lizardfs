@@ -5,15 +5,11 @@ hooks:
     - host-script: configure.sh
     - host-script : handle-master-relation.sh
       args: ["update"]
-    - host-script : handle-chunkserver-relation.sh
-      args: ["update"]
 
   leader-elected:
     - host-script: handle-leader.sh
       args: ["elected"]
     - host-script: handle-master-relation.sh
-      args: ["update"]
-    - host-script: handle-chunkserver-relation.sh
       args: ["update"]
   leader-settings-changed:
     - host-script: handle-leader.sh
@@ -21,8 +17,4 @@ hooks:
 
   master-relation-joined:
     - host-script : handle-master-relation.sh
-      args: ["join"]
-  
-  chunkserver-relation-joined:
-    - host-script : handle-chunkserver-relation.sh
       args: ["join"]

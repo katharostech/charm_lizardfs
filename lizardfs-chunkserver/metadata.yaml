@@ -9,6 +9,6 @@ tags:
   # https://jujucharms.com/docs/stable/authors-charm-metadata
   - storage
 subordinate: false
-provides:
-  chunkserver:
-    interface: lfs-chunkserver
+requires:
+  master:
+    interface: lfs-master

@@ -2,7 +2,7 @@
 
 set -e
 
-lucky set-status maintenance "Configuring LizardFS"
+lucky set-status maintenance "Configuring GUI"
 
 # Configure port
 port="$(lucky get-config port)"

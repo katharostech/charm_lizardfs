@@ -4,7 +4,7 @@ set -e
 
 # If we are joining a new relation
 if [ "$1" = "join" ]; then
-    lucky set-status maintenance "Joining Master relation"
+    lucky set-status maintenance "Connecting to client"
 
     if [ "$(lucky leader is-leader)" = "true" ]; then
         lucky relation set --app \
@@ -14,7 +14,7 @@ if [ "$1" = "join" ]; then
 
 # If we are supposed to update our existing relations
 elif [ "$1" = "update" ]; then
-    lucky set-status maintenance "Updating Master relations"
+    lucky set-status maintenance "Updating client connections"
 
     if [ "$(lucky leader is-leader)" = "true" ]; then
         for relation_id in $(lucky relation list-ids --relation-name master); do

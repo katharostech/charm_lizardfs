@@ -1,0 +1,13 @@
+hooks:
+  install:
+    - host-script: install.sh
+  
+  master-relation-joined:
+    - host-script: handle-master-relation.sh
+      args: ["join"]
+  master-relation-changed:
+    - host-script: handle-master-relation.sh
+      args: ["update"]
+  master-relation-changed:
+    - host-script: handle-master-relation.sh
+      args: ["leave"]

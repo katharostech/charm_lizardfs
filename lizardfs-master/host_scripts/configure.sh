@@ -2,7 +2,7 @@
 
 set -e
 
-lucky set-status maintenance "Configuring LizardFS"
+lucky set-status maintenance "Configuring Master"
 
 # Get admin password
 admin_password="$(lucky leader get admin_password)"
